@@ -23,6 +23,13 @@ void Calculation::CalEdgeForce() // хуевое название функции
 
     int n;
     n = indexZadelkaR - indexZadelkaL;
+
+    if(n <= 0)
+    {
+        //неправильно границы поставили, здесь приложение падает
+        return;
+    }
+
     a = new double*[n];
     y = new double[n];
     for (int i = 0; i < n; i++)
