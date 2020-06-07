@@ -34,6 +34,13 @@ private:
     QPushButton *leftBorder = new QPushButton("Левая граница");
     QPushButton *rightBorder = new QPushButton("Правая граница");
 
+    QLabel * nlValue = new QLabel;
+    QLabel * ulValue = new QLabel;
+    QLabel * nrValue = new QLabel;
+    QLabel * urValue = new QLabel;
+
+    QWidget * resW = new QWidget;
+
 signals:
 
     void draw(Rod * newRod);

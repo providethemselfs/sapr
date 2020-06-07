@@ -19,40 +19,72 @@ Preprocessor::Preprocessor(QWidget *parent) : QFrame(parent)
     leftBorder->setEnabled(false);
     rightBorder->setEnabled(false);
 
+    QLabel * nlName = new QLabel("NL:");
+    QLabel * ulName = new QLabel("UL:");
+    QLabel * nrName = new QLabel("NR:");
+    QLabel * urName = new QLabel("UR:");
 
 
 
-    QHBoxLayout * mainLt = new QHBoxLayout;
-    mainLt->addWidget(labL);
-    mainLt->addWidget(leL);
 
-    mainLt->addWidget(labA);
-    mainLt->addWidget(leA);
 
-    mainLt->addWidget(labE);
-    mainLt->addWidget(leE);
+    QVBoxLayout *mainLt = new QVBoxLayout;
 
-    mainLt->addWidget(labQ);
-    mainLt->addWidget(leQ);
 
-    mainLt->addWidget(labFl);
-    mainLt->addWidget(leFl);
+    QHBoxLayout * procLt = new QHBoxLayout;
+    procLt->addWidget(labL);
+    procLt->addWidget(leL);
 
-    mainLt->addWidget(labFr);
-    mainLt->addWidget(leFr);
+    procLt->addWidget(labA);
+    procLt->addWidget(leA);
 
-    mainLt->addStretch();
+    procLt->addWidget(labE);
+    procLt->addWidget(leE);
 
-    mainLt->addWidget(drawB);
-    mainLt->addWidget(removeB);
-    mainLt->addWidget(leftBorder);
-    mainLt->addWidget(rightBorder);
+    procLt->addWidget(labQ);
+    procLt->addWidget(leQ);
 
-    removeB->setEnabled(false);
+    procLt->addWidget(labFl);
+    procLt->addWidget(leFl);
+
+    procLt->addWidget(labFr);
+    procLt->addWidget(leFr);
+
+    procLt->addStretch();
+
+    procLt->addWidget(drawB);
+    procLt->addWidget(removeB);
+    procLt->addWidget(leftBorder);
+    procLt->addWidget(rightBorder);
+
+
+
+    QHBoxLayout * resLt = new QHBoxLayout;
+    resLt->addWidget(nlName);
+    resLt->addWidget(nlValue);
+
+    resLt->addWidget(ulName);
+    resLt->addWidget(ulValue);
+
+    resLt->addWidget(nrName);
+    resLt->addWidget(nrValue);
+
+    resLt->addWidget(urName);
+    resLt->addWidget(urValue);
+
+    resLt->addStretch();
+
+    resW->setLayout(resLt);
+
+    mainLt->addLayout(procLt);
+    mainLt->addWidget(resW);
 
 
 
     this->setLayout(mainLt);
+
+    removeB->setEnabled(false);
+    resW->hide();
 
     connect(drawB, SIGNAL(clicked()), this, SLOT(onDrawClicked()));
     connect(removeB, SIGNAL(clicked()), this, SLOT(onRemoveClicked()));
@@ -125,7 +157,12 @@ void Preprocessor::onItemSelected(Rod *rod)
         leFl->setText(QString::number(rod->Fl));
         leFr->setText(QString::number(rod->Fr));
 
+        nlValue->setText(QString::number(rod->NnL, 'g', 6));
+        ulValue->setText(QString::number(rod->UuMOOOOVEL, 'g', 6));
+        nrValue->setText(QString::number(rod->NnR, 'g', 6));
+        urValue->setText(QString::number(rod->UuMOOOOVER, 'g', 6));
 
+        resW->show();
     }
     else
     {
@@ -135,6 +172,8 @@ void Preprocessor::onItemSelected(Rod *rod)
         leQ->setText("");
         leFl->setText("");
         leFr->setText("");
+
+        resW->hide();
     }
 
     drawB->setEnabled(rod == nullptr);

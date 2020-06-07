@@ -18,7 +18,9 @@ void Calculation::CalEdgeForce() // хуевое название функции
         if (vecRods.at(i)->zadelkaR)
             indexZadelkaR = i;
     }
+    //дичь
     double **a, *y, *x;
+
     int n;
     n = indexZadelkaR - indexZadelkaL;
     a = new double*[n];
@@ -26,6 +28,7 @@ void Calculation::CalEdgeForce() // хуевое название функции
     for (int i = 0; i < n; i++)
     {
         a[i] = new double[n]; // заполнить нулями!!!
+
         for (int j = 0; j < n; j++)
             a[i][j] = 0;
         y[i] = 0;
@@ -71,11 +74,11 @@ void Calculation::CalEdgeForce() // хуевое название функции
         vecRods.at(i)->NnR = (helpCalEdgeForce(i) * (vecRods.at(i)->UuMOOOOVER - vecRods.at(i)->UuMOOOOVEL)) + (((vecRods.at(i)->Qq * vecRods.at(i)->Ll)/2) * (1 - 2*(1)));
     }
     //-----------
-    for (int i = 0; i < n; i++)
-        delete[] a[i];
-    delete[] a;
-    delete[] x;
-    delete[] y;
+    //for (int i = 0; i < n; i++)
+        //delete[] a[i];
+    //delete[] a;
+    //delete[] x;
+    //delete[] y;
 }
 
 double Calculation::helpCalEdgeForce(int i)
